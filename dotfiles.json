@@ -1,0 +1,6 @@
+{
+    "templates" : {
+        "git" : "~/.gitconfig",
+        "vim" : "/etc/vim/vimrc.local"
+    }
+}
