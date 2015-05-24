@@ -71,10 +71,23 @@ def dotfiles(app):
             print "Config ", e, " not found" 
             return 
         return 
+    
+    if app.params.install_all is not None: 
+        try:
+            for package in json["packages"]:
+                install(json, package)
+        except KeyError, e: 
+            print "Config ", e, " not found" 
+            return 
+        return 
+
 
 dotfiles.add_param("-f", "--file", help="Json file that describes your configuration", default="dotfiles.json")
 dotfiles.add_param("-i", "--install", help="Install a package declared on json file", default=None)
 dotfiles.add_param("-c", "--configure", help="Move a configuration file locates on templates folder", default=None)
+dotfiles.add_param("-ia", "--install-all", help="Install all dependencies", default=False)
+
+
 
 if __name__ == '__main__': 
     dotfiles.run() 
