@@ -39,9 +39,9 @@ def install(json, package):
     full_cmd = install_cmd % (package) 
     print "Running `%s`" % (full_cmd)   
     full_cmd_splited = full_cmd.split(' '); 
-    p = subprocess.Popen(full_cmd_splited, stdout=subprocess.PIPE, 
+    p = subprocess.Popen(full_cmd_splited, stdout=sys.stdout, 
             stderr=subprocess.PIPE, 
-            stdin=sys.stdout)
+            stdin=sys.stdin)
     out, err = p.communicate()
     if err:
         raise ValueError(err) 
