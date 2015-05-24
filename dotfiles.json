@@ -1,4 +1,18 @@
 {
+    "install-cmd" : "apt-get install -y %s",
+    "packages" : [
+        "git",
+        "vim", 
+        "tree",
+        "w3m", 
+        "terminator",
+        "php5",
+        "php5-json",
+        "nginx",
+        "php5-fpm",
+        "mysql-server-5.6",
+        "php5-mysql"
+    ],
     "templates" : {
         "git" : "~/.gitconfig",
         "vim" : "/etc/vim/vimrc.local"

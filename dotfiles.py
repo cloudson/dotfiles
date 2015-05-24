@@ -5,6 +5,7 @@ import cli.app
 import json
 import shutil 
 import os 
+import subprocess
 
 def parseJsonFile(filename): 
     fp = open(filename, 'r');
@@ -28,6 +29,25 @@ def moveConfiguration(json, config_name):
     print "copying", config, "to", path
     shutil.copy(config, path)
 
+def install(json, package):
+    install_cmd = json["install-cmd"] 
+    packages = json["packages"]
+
+    if not package in packages:
+        raise ValueError("%s isn't declared in json file" % (package)) 
+
+    full_cmd = install_cmd % (package) 
+    print "Running `%s`" % (full_cmd)   
+    full_cmd_splited = full_cmd.split(' '); 
+    p = subprocess.Popen(full_cmd_splited, stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE, 
+            stdin=sys.stdout)
+    out, err = p.communicate()
+    if err:
+        raise ValueError(err) 
+    print out 
+
+
 @cli.app.CommandLineApp
 def dotfiles(app):
     try:
@@ -43,8 +63,17 @@ def dotfiles(app):
             print "Config ", e, " not found" 
             return 
         return 
+    
+    if app.params.install is not None: 
+        try:
+            install(json, app.params.install)
+        except KeyError, e: 
+            print "Config ", e, " not found" 
+            return 
+        return 
 
 dotfiles.add_param("-f", "--file", help="Json file that describes your configuration", default="dotfiles.json")
+dotfiles.add_param("-i", "--install", help="Install a package declared on json file", default=None)
 dotfiles.add_param("-c", "--configure", help="Move a configuration file locates on templates folder", default=None)
 
 if __name__ == '__main__': 
