@@ -9,6 +9,9 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
+" show whitespaces
+set listchars=trail:>
+
 " vundle configuration
 set nocompatible              
 filetype off                  
