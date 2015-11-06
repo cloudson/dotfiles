@@ -12,23 +12,26 @@ set tabstop=4
 " show whitespaces
 set listchars=trail:>
 
-" vundle configuration
-set nocompatible              
-filetype off                  
-
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if exists("~/.vim/bundle/Vundle.vim") 
+    " vundle configuration
+    set nocompatible              
+    filetype off                  
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'scrooloose/nerdtree'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            
-filetype plugin indent on    
+    " All of your Plugins must be added before the following line
+    call vundle#end()            
+    filetype plugin indent on    
 
-" nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <C-n> :NERDTreeToggle<CR>
+    " nerdtree
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    map <C-n> :NERDTreeToggle<CR>
+
+endif 
+
