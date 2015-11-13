@@ -11,6 +11,9 @@ set tabstop=4
 
 " show whitespaces
 set listchars=trail:>
+set list! 
+
+set hlsearch
 
 " set the runtime path to include Vundle and initialize
 if exists("~/.vim/bundle/Vundle.vim") 
